@@ -1,0 +1,11 @@
+version: '3'
+services:
+  web:
+    build: .
+    container_name: "guide_gang_container"
+    ports:
+      - "5001:5000"
+    environment:
+      FLASK_ENV: development
+    volumes:
+      - .:/app
