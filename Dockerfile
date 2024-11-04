@@ -12,7 +12,8 @@ WORKDIR /app
 COPY . /app
 
 # Install any necessary packages
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip list  # Added to list installed packages for verification
 
 # Make port 5000 available to the world outside this container
 EXPOSE 5000

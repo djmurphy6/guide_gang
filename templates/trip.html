@@ -1,0 +1,96 @@
+<!-- templates/trip.html -->
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- Trip Title -->
+        <h2 id="tripTitle" onclick="editTitle()">Click to change trip name</h2>
+        <input type="text" id="editTitleInput" value="{{ trip_title }}" onkeydown="saveTitle(event)" style="display: none;" onblur="cancelEdit()"/>
+
+        <h3> Gear Checklist</h3>
+
+        <!-- Checklist container with id="checklist" -->
+        <div id="checklist">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Yourself
+                </label>
+            </div>
+        </div>
+
+        <div>
+            
+        </div>
+
+        <!-- Input for Adding New Checklist Items -->
+        <div>
+            <input type="text" id="newChecklistItem" placeholder="Add new checklist item" onkeydown="handleKeyPress(event)" />
+            <button onclick="addChecklistItem()">Add</button>
+        </div>
+
+        <div>
+            <h2>Weather Forecast</h2>
+            <a class="btn btn-primary" href="{{ url_for('forecast') }}">See the forecast</a>
+        </div>
+
+        
+
+        <!-- JavaScript to Handle Adding New Checklist Items -->
+        <script>
+            function updateTitleDisplay(newTitle) {
+                document.getElementById('tripTitle').textContent = newTitle;
+                document.getElementById('tripTitle').style.display = 'block';
+                document.getElementById('editTitleInput').style.display = 'none';
+            }
+
+            function editTitle() {
+                document.getElementById('tripTitle').style.display = 'none';
+                const titleInput = document.getElementById('editTitleInput');
+                titleInput.style.display = 'inline';
+                titleInput.focus();
+            }
+
+            function saveTitle(event) {
+                if (event.key === 'Enter') {
+                    const newTitle = document.getElementById('editTitleInput').value;
+                    updateTitleDisplay(newTitle);
+                }
+            }
+
+            function handleKeyPress(event) {
+                if (event.key === 'Enter') {
+                    addChecklistItem();
+                }
+            }
+            function addChecklistItem() {
+                const itemText = document.getElementById('newChecklistItem').value;
+                const checklist = document.getElementById('checklist'); // Ensure this exists
+
+                if (itemText.trim() !== "") {
+                    // Create new checklist item
+                    const newItem = document.createElement('div');
+                    newItem.className = 'form-check';
+
+                    const newCheckbox = document.createElement('input');
+                    newCheckbox.className = 'form-check-input';
+                    newCheckbox.type = 'checkbox';
+
+                    const newLabel = document.createElement('label');
+                    newLabel.className = 'form-check-label';
+                    newLabel.textContent = itemText;
+
+                    newItem.appendChild(newCheckbox);
+                    newItem.appendChild(newLabel);
+                    checklist.appendChild(newItem);
+
+                    // Clear the input field
+                    document.getElementById('newChecklistItem').value = "";
+                }
+            }
+            
+        </script>
+    </div>
+{% endblock %}

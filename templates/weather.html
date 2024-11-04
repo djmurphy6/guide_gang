@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Trip Weather Forecast{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Weather Forecast</h2>
+    <div class="row">
+        {% for period in forecast_data %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ period["name"] }}</h5>
+                    <p class="card-text"><strong>Forecast:</strong> {{ period["shortForecast"] }}</p>
+                    <p class="card-text"><strong>Temp:</strong> {{ period["temperature"] }}&deg;{{ period["temperatureUnit"] }}</p>
+                    <p class="card-text"><strong>Wind:</strong> {{ period["windSpeed"] }} {{ period["windDirection"] }}</p>
+                    <p class="card-text"><strong>Details:</strong> {{ period["detailedForecast"] }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
