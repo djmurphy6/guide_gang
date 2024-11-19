@@ -8,34 +8,37 @@
         <!-- Trip Title -->
         <h2 id="tripTitle" onclick="editTitle()">Click to change trip name</h2>
         <input type="text" id="editTitleInput" value="{{ trip_title }}" onkeydown="saveTitle(event)" style="display: none;" onblur="cancelEdit()"/>
+        <div class="inline">
+            <h5 id="tripDates" onclick="editDates()">Trip Dates:</h5>
+            <input type="date" id="editStartDate" value="{{ start_date }}" onkeydown="saveTitle(event)" onblur="cancelEdit()"/>
+            <h5> - </h5>
+            <input type="date" id="editEndDate" value="{{ end_date }}" onkeydown="saveTitle(event)" onblur="cancelEdit()"/>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <h3> Gear Checklist</h3>
 
-        <h3> Gear Checklist</h3>
-
-        <!-- Checklist container with id="checklist" -->
-        <div id="checklist">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
+                <!-- Checklist container with id="checklist" -->
+                <div id="checklist">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
                     Yourself
-                </label>
+                    </label>
+                    </div>
+                </div>
+
+                <!-- Input for Adding New Checklist Items -->
+                 <div>
+                    <input type="text" id="newChecklistItem" placeholder="Add new checklist item" onkeydown="handleKeyPress(event)" />
+                    <button onclick="addChecklistItem()">Add</button>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2>Weather Forecast</h2>
+                <a class="btn btn-primary" href="{{ url_for('forecast') }}">See the forecast</a>
             </div>
         </div>
-
-        <div>
-            
-        </div>
-
-        <!-- Input for Adding New Checklist Items -->
-        <div>
-            <input type="text" id="newChecklistItem" placeholder="Add new checklist item" onkeydown="handleKeyPress(event)" />
-            <button onclick="addChecklistItem()">Add</button>
-        </div>
-
-        <div>
-            <h2>Weather Forecast</h2>
-            <a class="btn btn-primary" href="{{ url_for('forecast') }}">See the forecast</a>
-        </div>
-
         
 
         <!-- JavaScript to Handle Adding New Checklist Items -->

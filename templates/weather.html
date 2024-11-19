@@ -4,7 +4,10 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="my-4">Weather Forecast</h2>
+    <div class=".flex-row">
+        <h2 class="my-4">Weather Forecast</h2>
+        <a class="btn btn-primary" href="{{ url_for('trip') }}">Back</a>
+    </div>
     <div class="row">
         {% for period in forecast_data %}
         <div class="col-md-4 mb-3">
