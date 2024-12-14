@@ -31,6 +31,11 @@ def about():
 def trip():
     return flask.render_template("trip.html")
 
+#route for daytrip page
+@app.route("/daytrip")
+def daytrip():
+    return flask.render_template("daytrip.html")
+
 
 @app.route("/forecast", methods = ['GET'])
 def forecast():

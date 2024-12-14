@@ -15,10 +15,9 @@
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Guide Gang Logo" class="logo">
             </a>
         </div>
-        <nav align = "Center" >
-            <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('trip') }}">Trip</a>
-            <a href="{{ url_for('about') }}">About</a>
+        <nav align="center">
+            <a href="{{ url_for('daytrip') }}" class="nav-box">Day-trip</a>
+            <a href="{{ url_for('trip') }}" class="nav-box">Multi-Day</a>
             <!-- Add more links as needed -->
         </nav>
     </header>

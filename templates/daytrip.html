@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="header">
+        <h4 style="display: inline;">Trip Location: </h4>
+        <span onclick="convertToInput(this)" style="display: inline;">Enter location</span>
+        
+        <br>
+        <h4 style="display: inline;">Date: </h4>
+        <span onclick="convertToInput(this)" style="display: inline;">Enter date</span>
+        
+        <script>
+            function convertToText(input) {
+            var span = document.createElement('span');
+            span.textContent = input.value;
+            span.style.display = 'inline';
+            span.onclick = function() { convertToInput(span); };
+            input.parentNode.replaceChild(span, input);
+            }
+
+            function convertToInput(span) {
+            var input = document.createElement('input');
+            input.type = span.previousElementSibling.textContent.includes('Date') ? 'date' : 'text';
+            input.value = span.textContent;
+            input.style.display = 'inline';
+            input.onblur = function() { convertToText(input); };
+            input.onkeypress = function(event) { checkEnter(event, input); };
+            span.parentNode.replaceChild(input, span);
+            input.focus();
+            }
+
+            function checkEnter(event, input) {
+            if (event.key === 'Enter') {
+                convertToText(input);
+            }
+            }
+        </script>
+    </div>
+
+    <div class="row">
+        <div class="col-sm" >
+            <h3> Gear Checklist</h3>
+
+            <!-- Checklist container with id="checklist" -->
+            <div class = "container" id="checklist">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Yourself
+                </label>
+                </div>
+            </div>
+
+                <!-- Input for Adding New Checklist Items -->
+                 <div>
+                    <input type="text" id="newChecklistItem" placeholder="Add new checklist item" onkeydown="handleKeyPress(event)" />
+                    <button onclick="addChecklistItem()">Add</button>
+                </div>
+            </div>
+            <div class="col-sm">
+                <h2>Weather Forecast</h2>
+                <a class="btn btn-primary" href="{{ url_for('forecast') }}">See the forecast</a>
+            </div>
+        </div>
+        
+
+        <!-- JavaScript to Handle Adding New Checklist Items -->
+        <script>
+
+            function handleKeyPress(event) {
+                if (event.key === 'Enter') {
+                    addChecklistItem();
+                }
+            }
+            function addChecklistItem() {
+                const itemText = document.getElementById('newChecklistItem').value;
+                const checklist = document.getElementById('checklist'); // Ensure this exists
+
+                if (itemText.trim() !== "") {
+                    // Create new checklist item
+                    const newItem = document.createElement('div');
+                    newItem.className = 'form-check';
+
+                    const newCheckbox = document.createElement('input');
+                    newCheckbox.className = 'form-check-input';
+                    newCheckbox.type = 'checkbox';
+
+                    const newLabel = document.createElement('label');
+                    newLabel.className = 'form-check-label';
+                    newLabel.textContent = itemText;
+
+                    newItem.appendChild(newCheckbox);
+                    newItem.appendChild(newLabel);
+                    checklist.appendChild(newItem);
+
+                    // Clear the input field
+                    document.getElementById('newChecklistItem').value = "";
+                }
+            }
+            
+        </script>
+{% endblock %}

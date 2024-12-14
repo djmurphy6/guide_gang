@@ -9,13 +9,37 @@
         <h2 id="tripTitle" onclick="editTitle()">Click to change trip name</h2>
         <input type="text" id="editTitleInput" value="{{ trip_title }}" onkeydown="saveTitle(event)" style="display: none;" onblur="cancelEdit()"/>
         <div class="inline">
-            <h5 id="tripDates" onclick="editDates()">Trip Dates:</h5>
+            <!-- Trip Dates -->
+            <h5 id="tripDates" onclick="editDates()">Dates:</h5>
             <input type="date" id="editStartDate" value="{{ start_date }}" onkeydown="saveTitle(event)" onblur="cancelEdit()"/>
             <h5> - </h5>
             <input type="date" id="editEndDate" value="{{ end_date }}" onkeydown="saveTitle(event)" onblur="cancelEdit()"/>
         </div>
+        <!-- Trip Location -->
+        <h5 id="tripLocation" onclick="editLocation()">Location:</h5>
+        <input type="text" id="editLocationInput" value="{{ location }}" onkeydown="saveTitle(event)" style="display: none;" onblur="cancelEdit()"/>
         <div class="row">
             <div class="col-sm">
+                <!-- Input for Editing Location -->
+                <input type="text" id="newLocationInput" placeholder="Enter new location" onkeydown="handleLocationKeyPress(event)" />
+                <button id="updateLocationButton" onclick="updateLocation()" style="display: none;">Update</button>
+
+                <script>
+                    function handleLocationKeyPress(event) {
+                        if (event.key === 'Enter') {
+                            updateLocation();
+                        }
+                    }
+
+                    function updateLocation() {
+                        const newLocation = document.getElementById('newLocationInput').value;
+                        if (newLocation.trim() !== "") {
+                            document.getElementById('tripLocation').textContent = newLocation;
+                            document.getElementById('newLocationInput').value = "";
+                        }
+                    }
+                </script>
+                
                 <h3> Gear Checklist</h3>
 
                 <!-- Checklist container with id="checklist" -->
@@ -23,7 +47,7 @@
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
-                    Yourself
+                            Yourself
                     </label>
                     </div>
                 </div>

@@ -7,6 +7,10 @@
     height: auto;
 }
 
+body {
+    background-color: #f0efe3; /* Light beige color */
+}
+
 .card {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -18,4 +22,36 @@
     font-weight: bold;
 }
 
+.inline{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
+.nav-box {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+.nav-box:hover {
+    background-color: #e2e6ea;
+}
+
+.header {
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.center-column {
+    display: flex;
+    justify-content: center;
+    text-align: left;
+    flex-direction: column;
+}
